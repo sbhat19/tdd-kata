@@ -20,6 +20,25 @@
 		- User name and password should not be same.
 		
 - Remember Me authentication
+
+	- Browser cookie based validation
+		- Cookie should not be empty.
+		- Cookie expiration should be set. 
+		- Cookie name should be unique.
+		- Cookie character should be of 30 character.
+		- Succesful authentication if cookie matches with server side cookie.
+	    - Failure authentication if cookie doesnt matches with server side cookie.
+		
+	
 - SSO based authentication
-- MFA based authentication
+
+   - Active directory based validation.
+	 - Account should be registered in the Active directory.
+	 - User should be authenticated against the Active directory.
+
+	
+- MFA based authentication (email based)
+	 - User should validate against user name and password.
+	 - On successful validation OTP will be sent to the registered email id.
+	 - User should authenticated against the valid OTP i.e received on the email id.
 
