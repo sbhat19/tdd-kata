@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpServletRequest;
 public class RememberAuthenticateService {
 
 	private static final String REMEMBER_ME_COOKIE_NAME = "rememberMeToken";
+	
+	private static final String USER_COOKIE = "123456";
+
 
 	public Boolean checkCookieExistsOrNot(HttpServletRequest request) {
 
@@ -18,13 +21,10 @@ public class RememberAuthenticateService {
 			return false;
 		}
 		for (Cookie c : cookieList) {
-			if (c.getName().equals(REMEMBER_ME_COOKIE_NAME)) {
+			if (c.getName().equals(REMEMBER_ME_COOKIE_NAME) && c.getMaxAge() != -1 && c.getValue().equals(USER_COOKIE)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
- 
-
 }

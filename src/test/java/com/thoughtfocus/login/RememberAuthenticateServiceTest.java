@@ -31,7 +31,7 @@ RememberAuthenticateService rememberAuthenticateService;
 	@DisplayName("Check whether cookie property exists or not and return false")
 	void checkCookiePropertyExistsOrNot() {
 	    MockHttpServletRequest request = new MockHttpServletRequest();
-	    request.setCookies(new Cookie("userName","test@gamil.com"));
+	    request.setCookies(new Cookie("userName","123456"));
 		Boolean actual = rememberAuthenticateService.checkCookieExistsOrNot(request);
 		assertEquals(Boolean.FALSE, actual);
 	}
@@ -41,9 +41,43 @@ RememberAuthenticateService rememberAuthenticateService;
 	@DisplayName("Check whether cookie property exists and return true")
 	void checkCookiePropertyExist() {
 	    MockHttpServletRequest request = new MockHttpServletRequest();
-	    request.setCookies(new Cookie("rememberMeToken","test@gamil.com"));
+	    Cookie cookie = new Cookie("rememberMeToken","123456");
+	    cookie.setMaxAge(1000);
+	    request.setCookies(cookie);
 		Boolean actual = rememberAuthenticateService.checkCookieExistsOrNot(request);
 		assertEquals(Boolean.TRUE, actual);
+	}
+	
+	@Test
+	@DisplayName("Should fail when the expiry is -1")
+	void checkWhetherCookieExpiryIsSet() {
+	    MockHttpServletRequest request = new MockHttpServletRequest();
+	    request.setCookies(new Cookie("rememberMeToken","123456"));
+		Boolean actual = rememberAuthenticateService.checkCookieExistsOrNot(request);
+		assertEquals(Boolean.FALSE, actual);
+	}
+	
+	
+	@Test
+	@DisplayName("Should pass for the valid cookie from the client")
+	void cookieValueShouldMatchWithServerCookieAndLogin() {
+	    MockHttpServletRequest request = new MockHttpServletRequest();
+	    Cookie cookie = new Cookie("rememberMeToken","123456");
+	    cookie.setMaxAge(1000);
+	    request.setCookies(cookie);
+	    Boolean actual = rememberAuthenticateService.checkCookieExistsOrNot(request);
+		assertEquals(Boolean.TRUE, actual);
+	}
+	
+	@Test
+	@DisplayName("Should fail for the invalid cookie from the client")
+	void cookieValueShouldNotMatchWithServerCookie() {
+	    MockHttpServletRequest request = new MockHttpServletRequest();
+	    Cookie cookie = new Cookie("rememberMeToken","654321");
+	    cookie.setMaxAge(1000);
+	    request.setCookies(cookie);
+	    Boolean actual = rememberAuthenticateService.checkCookieExistsOrNot(request);
+		assertEquals(Boolean.FALSE, actual);
 	}
 
 }
