@@ -8,10 +8,10 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class UsernamePasswordAuthenticationServiceTest {
-
+class UserRegisterationServiceTest {
+  
   @InjectMocks
-  private UsernamePasswordAuthenticationService usernamePasswordAuthenticationService;
+  private UserRegisterationService  userRegisterationService;
 
   @Test
   @DisplayName("User registration should fail due to invalid username is null")
@@ -19,7 +19,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = null;
     String password = "P@ssw0rd";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
     Assertions.assertFalse(result, "User registration should fail due to invalid username is null");
   }
 
@@ -29,7 +29,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "";
     String password = "P@ssw0rd";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid username is empty");
   }
@@ -40,7 +40,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "johny1234";
     String password = "P@ssw0rd";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid username (too short)");
   }
@@ -51,7 +51,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "john$doe123";
     String password = "Passw0rd";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid username (having  special character apart from @ . _)");
   }
@@ -62,7 +62,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "johndoe123@gmail.com";
     String password = null;
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid password is null");
   }
@@ -73,7 +73,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "john@doe";
     String password = "";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid password is empty");
   }
@@ -84,7 +84,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "john@doe";
     String password = "pass";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid password (too short)");
   }
@@ -95,7 +95,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "john@doe";
     String password = "p@ssw0rd1234";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid password (missing uppercase letter)");
   }
@@ -106,7 +106,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "john@doe";
     String password = "P@SSW0RD1234";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid password (missing lowercase letter)");
   }
@@ -117,7 +117,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "john@doe";
     String password = "P@sswordabcd";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid password (missing digit)");
   }
@@ -128,7 +128,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "john@doe";
     String password = "Passw0rd1234";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to invalid password (missing special character)");
   }
@@ -139,7 +139,7 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "Johndoe123@gmail.com";
     String password = "Johndoe123@gmail.com";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertFalse(result, "User registration should fail due to same username and password");
   }
@@ -150,10 +150,9 @@ class UsernamePasswordAuthenticationServiceTest {
     String username = "naveedmd123@gmail.co.in";
     String password = "P@ssw0rd123";
 
-    boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
+    boolean result = userRegisterationService.registerUser(username, password);
 
     Assertions.assertTrue(result, "User registration should succeed");
   }
 
-  
 }
