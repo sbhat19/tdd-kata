@@ -12,7 +12,7 @@ public class UsernamePasswordAuthenticationService {
 
   private Boolean isValidUsername(String userName)
   {
-    String emailPattern = "^[a-zA-Z0-9_.]+@[a-zA-Z0-9.-]+$";
+    String emailPattern = "^[a-zA-Z0-9_.]+@[a-zA-Z.]+$";
     return StringUtils.isNotBlank(userName) && userName.length() >= 10 && userName.matches(emailPattern);
   }
   

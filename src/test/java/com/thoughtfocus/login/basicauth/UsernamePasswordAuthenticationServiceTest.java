@@ -147,7 +147,7 @@ class UsernamePasswordAuthenticationServiceTest {
   @Test
   @DisplayName("User registration should succeed")
   void testValiduserRegistration() {
-    String username = "naveedmd123@gmail.com";
+    String username = "naveedmd123@gmail.co.in";
     String password = "P@ssw0rd123";
 
     boolean result = usernamePasswordAuthenticationService.registerUser(username, password);
